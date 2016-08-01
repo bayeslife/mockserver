@@ -1,9 +1,11 @@
 # Using mockserver
 
-In the past , a client needed a way to configure, maintain and run mocks. I had investigated an approach ([mocked app](https://docs.mulesoft.com/mule-user-guide/v/3.6/configuring-reconnection-strategies))based on nodejs based recorder and mocker but the testers were more comfortable with Soap UI and did have some mechanism to manage and run mocks.
+In the past , a client needed a way to configure, maintain and run mocks. I had investigated an approach ([mocked app](https://docs.mulesoft.com/mule-user-guide/v/3.6/configuring-reconnection-strategies))based on a nodejs based recorder and mocker but the testers were more comfortable with Soap UI and already had some mechanism to manage and run mocks.
 
 Then recently they ran into a problem invoking Soap UI mocks over https.  In investigating a solution for this problem ,
 [Mockserver netty ](https://docs.mulesoft.com/mule-user-guide/v/3.6/configuring-reconnection-strategies) came across my radar.
+
+Its quite a handy mocking capability and I realized that it is reasonably fully featured. 
 
 ## Proxying from HTTPS to HTTP
 
