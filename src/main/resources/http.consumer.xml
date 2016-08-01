@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder" xmlns:iag-jwt="http://www.mulesoft.org/schema/mule/iag-jwt" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+		xmlns:iag-logger="http://www.mulesoft.org/schema/mule/iag-logger"
+		xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns="http://www.mulesoft.org/schema/mule/core"
+		xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+		xmlns:http="http://www.mulesoft.org/schema/mule/http"
+		xmlns:spring="http://www.springframework.org/schema/beans"
+		xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+        xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/secure-property-placeholder http://www.mulesoft.org/schema/mule/secure-property-placeholder/current/mule-secure-property-placeholder.xsd"
+	>
+
+	<http:request-config name="HTTPS_Request_Configuration" protocol="HTTPS" host="${host}" port="${port}" doc:name="HTTPS Request Configuration">
+        <tls:context>
+            <tls:trust-store path="trust.jks" password="password"/>
+        </tls:context>
+    </http:request-config>
+
+
+    <flow name="entry">
+		<http:request config-ref="HTTPS_Request_Configuration" path="${path}" method="GET" responseTimeout="60000" doc:name="HTTP">
+			<http:success-status-code-validator values="0..599"/>
+		</http:request>
+		<component class="bayeslife.MyComponent"/>
+	</flow>
+
+</mule>
