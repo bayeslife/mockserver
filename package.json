@@ -1,0 +1,23 @@
+{
+  "name": "mockserver",
+  "version": "1.0.0",
+  "description": "In the past , a client needed a way to configure, maintain and run mocks. I had investigated an approach ([mocked app](https://docs.mulesoft.com/mule-user-guide/v/3.6/configuring-reconnection-strategies))based on a nodejs based recorder and mocker but the testers were more comfortable with Soap UI and already had some mechanism to manage and run mocks.",
+  "main": "create-forward-expectation.js",
+  "dependencies": {},
+  "devDependencies": {
+    "mockserver-client": "^1.0.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bayeslife/mockserver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bayeslife/mockserver/issues"
+  },
+  "homepage": "https://github.com/bayeslife/mockserver#readme"
+}
