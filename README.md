@@ -5,7 +5,7 @@ In the past , a client needed a way to configure, maintain and run mocks. I had 
 Then recently they ran into a problem invoking Soap UI mocks over https.  In investigating a solution for this problem ,
 [Mockserver netty ](https://docs.mulesoft.com/mule-user-guide/v/3.6/configuring-reconnection-strategies) came across my radar.
 
-Its quite a handy mocking capability and I realized that it is reasonably fully featured. 
+Its quite a handy mocking capability and I realized that it is reasonably fully featured.
 
 ## Proxying from HTTPS to HTTP
 
@@ -143,4 +143,30 @@ Because the mockserver is just java code, it is possible to provision and deprov
     public void stopProxy() {
         mockServer.stop();
     }
+```
+
+## Simulating a disconnected
+
+You might want to simulate a service disconnects the connection.  For example a proxy that requests are proxied through which might have firewall rules which block a particular connection.
+
+You can do this as well with the mockserver. Here is a sample for how to do this.
+
+```
+var mockServer = require('mockserver-client'),
+    mockServerClient = mockServer.mockServerClient;
+
+mockServerClient("localhost", 1080).mockAnyResponse(
+    {
+        'httpRequest': {
+            'method': 'GET',
+            'path': '/api/.*'
+        },
+        'httpError': {
+            'dropConnection': true
+        },
+        'times': {
+            'unlimited': true
+        }
+    }
+);
 ```
