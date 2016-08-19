@@ -145,7 +145,7 @@ Because the mockserver is just java code, it is possible to provision and deprov
     }
 ```
 
-## Simulating a disconnected
+## Simulating a disconnection
 
 You might want to simulate a service disconnects the connection.  For example a proxy that requests are proxied through which might have firewall rules which block a particular connection.
 
@@ -169,4 +169,19 @@ mockServerClient("localhost", 1080).mockAnyResponse(
         }
     }
 );
+```
+
+
+## Trusting the mockserver https
+
+The mockserver https session returns an on the fly generate certificate that is signed by the mock server certificate (here)[https://github.com/jamesdbloom/mockserver/blob/master/mockserver-core/src/main/resources/org/mockserver/socket/CertificateAuthorityCertificate.pem].
+
+By default the hostname for the generated certificate is localhost.
+
+So in order to have a client establish the mock server https connection you need to
+- import the mock server certificate into your clients trust store
+- but also start the mockserver up with hostname where the mockserver will be accessed specified by passing the system property  -Dmockserver.sslCertificateDomainName=<hostname>
+as in the following example
+```
+java  -Dmockserver.sslCertificateDomainName=corp.dev.local -jar ./mockserver-netty-3.10.4-jar-with-dependencies.jar -serverPort 1080
 ```
