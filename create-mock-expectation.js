@@ -9,7 +9,7 @@ mockServerClient("localhost", 1080).mockAnyResponse(
         },
         'httpResponse': {
             'statusCode': 200,
-            'body': JSON.stringify({ name: 'value' }),
+            'body': JSON.stringify({ someproperty: 'somevalue' }),
             'delay': {
                 'timeUnit': 'MILLISECONDS',
                 'value': 5000

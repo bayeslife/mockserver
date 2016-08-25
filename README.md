@@ -59,7 +59,7 @@ This allows test cases to represent the mocks as well as the test requests and a
 
 To demonstrate this behaviour start the mockserver with a server port
 ```
-java -jar ./mockserver-netty-3.10.4-jar-with-dependencies.jar -serverPort 1080 -proxyRemoteHost localhost
+java -jar ./mockserver-netty-3.10.4-jar-with-dependencies.jar -serverPort 1080
 ```
 
 then run the following to retrieve javascript dependencies
@@ -99,7 +99,7 @@ mockServerClient("localhost", 1080).mockAnyResponse(
         },
         'httpResponse': {
             'statusCode': 200,
-            'body': JSON.stringify({ name: 'value' }),
+            'body': JSON.stringify({ someproperty: 'somevalue' }),
             'delay': {
                 'timeUnit': 'MILLISECONDS',
                 'value': 5000
@@ -110,6 +110,17 @@ mockServerClient("localhost", 1080).mockAnyResponse(
         }
     }
 );
+```
+
+Inject this expectation into the mock
+```
+node create-mock-expectations.js
+```
+
+Now run the same request. There is a delay of 5 seconds before the mock is returned
+```
+curl https://localhost:1080/api/something
+{ someproperty: 'somevalue' }
 ```
 
 ## Running in a unit test
